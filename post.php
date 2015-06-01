@@ -2,8 +2,10 @@
 session_start();
 if(isset($_SESSION['name'])){
     //$text = '';
-	$text = isset($_POST['text']);
-        
+    if(isset($_POST['text']))
+    {
+	$text = $_POST['text'];
+    }   
         
     include 'Excel/reader.php';
     
@@ -21,7 +23,7 @@ if(isset($_SESSION['name'])){
       while($y<=$excel->sheets[0]['numCols']) {
         $cell = isset($excel->sheets[0]['cells'][$y][1]) ? $excel->sheets[0]['cells'][$y][1] : '';
         //echo "\t\t<td>$cell</td>\n";
-        echo $excel->sheets[0]['cells'][4][1];
+        echo $excel->sheets[0]['cells'][$y][1];
         if($text === $cell)
         {
             $_SESSION['cell']=$excel->sheets[0]['cells'][$y][2];
